@@ -16,7 +16,11 @@ app.put('/courses/:id', (req, res) => {
 });
 
 app.patch('/courses/:id', (req, res) => {
-    return res.json(["Curso 6", "Curso2", "Curso3", "Curso4"]);
+    return res.json(["Curso 6", "Curso7", "Curso3", "Curso4"]);
+});
+
+app.delete('/courses/:id', (req, res) => {
+    return res.json(["Curso 6", "Curso2", "Curso4"])
 });
 
 
