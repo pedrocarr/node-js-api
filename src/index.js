@@ -3,8 +3,21 @@ const express = require('express');
 const app = express();
 
 
-app.get('/', (req, res) => {
-    return res.json({ message: "Hello World!!"});
-})
+app.get('/courses', (req, res) => {
+    return res.json(["Curso1", "Curso2", "Curso3"]);
+});
+
+app.post('/courses', (req, res) => {
+    return res.json(["Curso1", "Curso2", "Curso3", "Curso4"]);
+});
+
+app.put('/courses/:id', (req, res) => {
+    return res.json(["Curso 6", "Curso2", "Curso3", "Curso4"]);
+});
+
+app.patch('/courses/:id', (req, res) => {
+    return res.json(["Curso 6", "Curso2", "Curso3", "Curso4"]);
+});
+
 
 app.listen(3333);
