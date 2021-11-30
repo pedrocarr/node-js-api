@@ -22,16 +22,16 @@ app.post('/account', (req, res) => {
     if(customerAlreadyExists) {
         return res.status(400).json({ error: "Customer Already Exists!" });
     }
-    const id = uuidv4();
+     
 
     customers.push({
         cpf,
         name,
-        id,
+        id: uuidv4(),
         statement: []
     });
     console.log(customers);
-    return resp.status(201).send();
+    return res.status(201).send();
 });
 
 app.listen(3333);
