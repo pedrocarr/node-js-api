@@ -93,7 +93,9 @@ app.post('/withdraw', verifyIfExistsAccountCPF, (req, res) => {
 
     if (balance < amount) {
         return res.status(400).json({ error: "Insuficient funds!" })
-    }
+    } 
+
+    
 
     const statementOperation = {
         amount,
@@ -103,6 +105,57 @@ app.post('/withdraw', verifyIfExistsAccountCPF, (req, res) => {
 
     customer.statement.push(statementOperation)
 
+});
+
+
+app.get('/statement/date', verifyIfExistsAccountCPF, (req, res) => {
+    const { customer } = req;
+    const { date } = req.query;
+
+    const dateFormat = new Date(date + " 00:00");
+
+    const statement = customer.statement.filter(
+        (statement) => 
+        statement.created_at.toDateString() ===
+        new Date(dateFormat).toDateString()
+    );
+
+    return res.json(statement);
+});
+
+app.put(('/account', verifyIfExistsAccountCPF, (req, res) => {
+    const { name } = req.body;
+    const { customer } = req;
+
+    customer.name = name;
+
+
+    return res.status(201).send();
+    })
+);
+
+app.get('/account', verifyIfExistsAccountCPF, (req, res ) => {
+    const { customer } = req;
+
+    return res.json(customer);
+});
+
+app.delete('/account', verifyIfExistsAccountCPF, (req, res) => {
+    const { customer } = req;
+
+    // splice
+
+    customers.splice(customer, 1);
+
+    return res.status(200).json(customers);
+})
+
+app.get('/balance', verifyIfExistsAccountCPF, (req, res) => {
+    const { customer } = req;
+
+    const balance = getBalance(customer.statement);
+
+    return res.json(balance);
 })
 
 app.listen(3333);
