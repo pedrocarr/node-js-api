@@ -104,8 +104,8 @@ app.post('/withdraw', verifyIfExistsAccountCPF, (req, res) => {
         type: "debit"
     }
 
-    customer.statement.push(statementOperation)
-
+    customer.statement.push(statementOperation);
+    return res.status(200).send();
 });
 
 
