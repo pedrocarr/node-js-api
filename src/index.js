@@ -6,6 +6,7 @@ const app = express();
 app.use(express.json());
 
 const customers = [];
+
 /**
  * cpf - string
  * name - string
